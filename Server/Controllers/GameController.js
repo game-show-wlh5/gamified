@@ -1,14 +1,6 @@
 const uuid = require("uuid/v1");
 
 module.exports = {
-  // createUser: (req, res) => {
-  //   const { username } = req.body;
-  //   req.session.user = {
-  //     username
-  //   };
-  //   res.status(200).send(req.session.user);
-  // },
-
   createUser: async (req, res) => {
     const { username } = req.body;
     const db = req.app.get('db')
@@ -31,6 +23,7 @@ module.exports = {
   //     res.status(401).send("Please login");
   //   }
   // },
+  
   createGame: async (req, res) => {
     const gameID = uuid();
     console.log(req.body)
