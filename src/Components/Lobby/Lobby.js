@@ -76,7 +76,7 @@ class Lobby extends Component {
   };
 
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     const currentSession = this.props.gameInfo.users.map((ele, i) => {
       // console.log(ele);
       return <p key={i}>{ele.username}</p>;
