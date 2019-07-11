@@ -12,7 +12,7 @@ const SocketConnection = (server, app) => {
     socket.on("join room", async gameID => {
       socket.join(gameID);
       const users = await db.get_lobby_users({ game_id: gameID });
-      io.to(gameID).emit("room joined", users);
+      io.in(gameID).emit("room joined", users);
     });
     socket.on("leave room", async (username, gameID) => {
       await db.delete_user_lobby({username});
@@ -27,8 +27,12 @@ const SocketConnection = (server, app) => {
     socket.on("end game", gameID => {
       socket.to(gameID).emit("end room");
     });
-    socket.on("disconnect", () => {
-      console.log("A user has disconnected");
+    socket.on("finish game", async (data) => {
+      const { gameID, username, userID, score } = data;
+      await db.user_update({id: userID, score})
+      const users = await db.get_lobby_users({ game_id: gameID });
+      socket.emit("finishedGame", users)
+      // console.log(data);
     });
   });
 };

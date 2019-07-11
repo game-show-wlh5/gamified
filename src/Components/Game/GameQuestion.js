@@ -23,6 +23,7 @@ class Game extends Component {
     }
 
     handleGetQuestion = () => {
+        console.log('gq', this.props)
         const { questions } = this.props
         let questionCount = questions.length
         this.setState({

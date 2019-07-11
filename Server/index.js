@@ -29,6 +29,8 @@ app.use(
     app.get('/gamecentral/games', gameCtrl.getUserGames)
     app.get('/getgame/:id', gameCtrl.getGameDetails)
     
+    app.get('/questions/:id', gameCtrl.getQuestionsPlayGame)
+    
     //POST ENDPOINTS
     app.post('/user', gameCtrl.createUser)
     app.post('/game/create', gameCtrl.createGame)

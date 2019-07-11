@@ -58,10 +58,8 @@ module.exports = {
   joinGame: async (req, res) => {
     const { gameID, username } = req.body;
     const db = req.app.get("db");
-    // console.log(gameID)
     const getGame = await db.get_game({ gameroom_id: gameID })
     if (getGame[0]) {
-      // console.log(getGame)
       db.insert_game_user({gameID, username})
         .then(() => {
           res.status(200).send(getGame[0]);
@@ -127,11 +125,22 @@ module.exports = {
   },
 
   removedUser: async (req, res ) => {
+    const { username } = req.query
     const db = req.app.get('db')
     await db.remove_user_game({ username })
     res.status(200).send('User removed from lobby')
   },
 
+  getQuestionsPlayGame: (req, res) => {
+    console.log('hit controller', req.params)
+    const { id } = req.params;
+    const db = req.app.get('db');
+    db.questions_getall_forgame(id)
+      .then(questions => {
+        res.status(200).send(questions)
+      })
+  },
+  
   editGame: async (req, res) => {
     console.log('Made it To Edit Gamecontroller',req.body)
     const {game_id,game_title,game_intro} = req.body

@@ -6,8 +6,10 @@ import { connect } from 'react-redux'
 import {
     loadGameDetails,
     setGameID,
-    lobbyUsers
-  } from "../../redux/userReducer";
+    lobbyUsers,
+    userScore
+} from "../../redux/userReducer";
+import socket from '../Sockets';
 import './Game.css';
 import ReactAudioPlayer from 'react-audio-player'
 import song from '../../Assets/GameTheme.wav'
@@ -20,25 +22,37 @@ class Game extends Component {
             score: 0,
             timer: 30,
             username: '',
+            users: [],
             userID: null,
-            questions: [
-                { question: 'question 3', remediation: 'this is remediation 3', answer: 'answer3', distractor1: 'distractor12', distractor2: 'distractor23', distractor3: 'distractor33' },
-                { question: 'question 2', remediation: 'this is remediation 2', answer: 'answer2', distractor1: 'distractor12', distractor2: 'distractor22', distractor3: 'distractor32' },
-                { question: 'question 1 questi 1111 question 111 akl;sdjfkl; aksdj f;alkdjsf dsa', remediation: 'this is remediation 1', answer: 'answer1', distractor1: 'distractor11', distractor2: 'distractor21', distractor3: 'distractor31' }]
+            questions: []
         }
     }
 
     componentDidMount() {
         this.handleGetGame();
+        socket.on('finishedGame', (data) => {
+            this.setState({
+                users: data
+            })
+        })
     }
 
     handleGetGame = () => {
         // axios call to get game questions
+        const { gameID } = this.props.gameInfo;
+        console.log('here', gameID)
         const { username, id } = this.props.gameInfo.username;
-        this.setState({
-            username: username,
-            userID: id
-        })
+        axios.get(`/questions/${gameID}`)
+            .then(res => {
+                // console.log('res', res.data)
+                const questions = res.data
+                console.log('questions', questions)
+                this.setState({
+                    username: username,
+                    userID: id,
+                    questions
+                })
+            })
     }
 
 
@@ -57,35 +71,42 @@ class Game extends Component {
     }
 
     handleUpdateUser = () => {
+        const { gameID } = this.props.gameInfo;
         const { username, userID, score } = this.state;
-        axios.put(`/user/${userID}`, { id: userID, username, score })
-            .then(res => {
-            this.handleGameCompledToggle()
-        })
+        socket.emit('finish game', { gameID, username, userID, score })
+        this.handleGameCompledToggle()
     }
 
 
     render() {
-        
-        console.log('game', this.props.gameInfo)
+
+        console.log('gamestate', this.state.questions)
+        const { users } = this.state
         const { score, questions, username } = this.state;
         return (
             <div className='playGameCont'>
-            <ReactAudioPlayer src={song} autoPlay loop/>
+                <ReactAudioPlayer src={song} autoPlay loop />
                 {(this.state.completedToggle === false)
                     ? (
                         <div>
-                            <GameQuestion
-                                handleScoreUpdate={this.handleScoreUpdate}
-                                questions={questions}
-                                handleUpdateUser={this.handleUpdateUser}
-                                score={score}
-                                username={username}/>
+                            {(questions.length === 0)
+                                ? (
+                                    <div>waiting</div>
+                                ) : (
+                                    <GameQuestion
+                                        handleScoreUpdate={this.handleScoreUpdate}
+                                        questions={questions}
+                                        handleUpdateUser={this.handleUpdateUser}
+                                        score={score}
+                                        username={username} />
+                                )}
                         </div>
                     ) : (
                         <div>
                             <LeaderBoard
-                                score={score} />
+                                score={score}
+                                username={username}
+                                users={users} />
                         </div>
                     )}
             </div>
@@ -93,16 +114,17 @@ class Game extends Component {
     }
 }
 
-function mapStateToProps(reduxState){
+function mapStateToProps(reduxState) {
     return {
-      gameInfo: reduxState.userReducer
+        gameInfo: reduxState.userReducer
     }
 }
 
 const mapDispatchToProps = {
     loadGameDetails,
     setGameID,
-    lobbyUsers
-  };
+    lobbyUsers,
+    userScore
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);

@@ -6,7 +6,8 @@ import {
   setGameID,
   lobbyUsers
 } from "../../redux/userReducer";
-import io from "socket.io-client";
+import socket from '../Sockets';
+// import io from "socket.io-client";
 import "./Lobby.css";
 import ReactAudioPlayer from 'react-audio-player';
 import song from "../../Assets/GameLogin.wav";
@@ -23,8 +24,8 @@ class Lobby extends Component {
   }
 
   componentDidMount() {
-    this.socket = io();
-    this.socket.on("room joined", data => {
+    // socket = io();
+    socket.on("room joined", data => {
       this.joinSuccess(data);
     });
     this.joinRoom();
@@ -42,7 +43,7 @@ class Lobby extends Component {
   }
 
   joinRoom = () => {
-    this.socket.emit("join room", this.props.match.params.id)
+    socket.emit("join room", this.props.match.params.id)
   };
   joinSuccess = currentUsers => {
     // console.log(currentUsers);
@@ -50,7 +51,7 @@ class Lobby extends Component {
   };
 
   leaveRoom = () => {
-    this.socket.emit(
+    socket.emit(
       "leave room",
       this.props.gameInfo.username,
       this.props.gameInfo.gameID

@@ -67,6 +67,7 @@ function reducer(state = initialState, action) {
     case LOBBY_USERS:
       return { ...state, users: action.payload };
     case USER_SCORE:
+      console.log(action.payload)
       return { ...state, score: action.payload};
     default:
       return state;
