@@ -48,6 +48,10 @@ class JoinGame extends Component {
       <div>
       {/* <div className="join-banner">Join Game</div> */}
       <form className="join-container" onSubmit={this.handleLogin}>
+      <div className='infoHolder1'>
+
+      <div className='logInHolder'>
+      <h1>Enter a Game</h1>
         <label className="username-input" htmlFor="username">
           Username
         </label>
@@ -55,12 +59,14 @@ class JoinGame extends Component {
           type="text"
           id="username"
           onChange={this.handleLoginInfoUpdate}
-        />
+          />
         <label className="gameID-input" htmlFor="gameID">
           Game ID
         </label>
         <input type="text" id="gameID" onChange={this.handleLoginInfoUpdate} />
         <button className="join-btn" type="submit">Join Game</button>
+          </div>
+          </div>
       </form>
       </div>
     );

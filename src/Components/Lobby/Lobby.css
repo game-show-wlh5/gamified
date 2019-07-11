@@ -1,3 +1,7 @@
+/* .container {
+  display: none;
+} */
+
 .lobbyContainer{
   background-image: url('../../Assets/space_texture.png'),
                     linear-gradient(to top, rgb(64, 18, 104), black);
@@ -6,14 +10,18 @@
   align-items: center;
   height: 100vh;
   width:100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
 }
 
 .spaceRaceImg {
   background-image: url('../../Assets/rocketrace_logo.png');
   width: 50%;
   height: 100%;
-  background-size: contain;
   background-repeat: no-repeat; 
+  margin-left: 170px;
+  margin-top: 300px;
 }
 
 .holder {
@@ -22,6 +30,7 @@
   display: flex;
   align-items: flex-end;
   flex-direction: column;
+  margin-right: 50px;
 }
 
 .users{
@@ -31,6 +40,10 @@
 .lobbyUsers {
   display: flex;
   flex-direction: column;
+}
+
+.lobbyUsers p {
+  font-size: 50px;
 }
 
 /* .lobbybox{
@@ -43,7 +56,7 @@
 } */
 
 .lobbyDescription{
-  height:40vh;
+  height:20vh;
   /* background-color:lightgray; */
   width:40vw;
   border-bottom:solid 2px white;
@@ -51,6 +64,7 @@
   font-size: 30px;
   display: flex;
   justify-content: center;
+  margin-top: 50px;
 }
 
 .lobbyUsers{
@@ -71,6 +85,7 @@
   height: 10vh;
   width: 30vw;
   margin-right: 90px;
+  margin-bottom: 50px;
 }
 
 .dummyUser{

@@ -27,6 +27,8 @@ class GameCentral extends Component {
     this.props.requestUserGames(userInfo)
     console.log('Request Games firing',this.props)
   }
+
+ 
   //  userCheck = () => {
   //    let userInfo = (this.props.user.adminReducer.user)
   //    console.log(this.props)
@@ -45,6 +47,12 @@ class GameCentral extends Component {
 
 
   render() {
+
+    const gameFetch = () =>{
+      let userInfo = (this.props.user.adminReducer.user)
+      this.props.requestUserGames(userInfo)
+      console.log('Request Games firing',this.props)
+    }
 
     const openCreateModel = () => {
       this.setState({
@@ -92,7 +100,7 @@ class GameCentral extends Component {
             <button id='createGameModal' onClick={openCreateModel}>create game</button>
 
             {this.state.CreateModal !== 'false'
-              ? <GameCreateModal createDisplay={this.state.CreateModal} callbackFromParent={closeCreateModel} callbackForupdateNewGameId={updateNewGameId} callbackForAddQuestion={openAddQuestion} />
+              ? <GameCreateModal createDisplay={this.state.CreateModal} callbackFromParent={closeCreateModel} callbackForupdateNewGameId={updateNewGameId} callbackForAddQuestion={openAddQuestion} callbackgameFetch={gameFetch}/>
               : null
             }
 

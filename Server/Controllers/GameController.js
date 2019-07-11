@@ -163,6 +163,7 @@ module.exports = {
 
   getGameQuestions: (req,res) => {
     const game_id = req.body.game_id
+    console.log('Game Controller',req.body,req.params.session)
     const dbInstance = req.app.get('db');
     dbInstance.questions_get_all({game_id})
     .then((question) => {

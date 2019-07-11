@@ -53,7 +53,10 @@ class GameCreateModal extends Component {
       closeCreateModel();
       createGame();
       opedAddQuestion();
+      this.props.callbackgameFetch()
     }
+
+    console.log(this.props)
     return (
       <div id='gameCreateModal' className='modal'>
         <div className='gameCreateModalContent'>

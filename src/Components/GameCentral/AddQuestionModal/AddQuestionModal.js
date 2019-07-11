@@ -21,16 +21,17 @@ class AddQuestionModal extends Component {
     }
   }
   
-  componentDidMount() {
-    let userInfo = (this.props.user.adminReducer.user)
-    this.props.requestUserGames(userInfo)
-    console.log('Request Games firing',this.props)
-  }
+  // componentDidMount() {
+  //   let userInfo = (this.props.user.adminReducer.user)
+  //   this.props.requestUserGames(userInfo)
+  //   console.log('Request Games firing',this.props)
+  // }
 
   componentDidUpdate(){
     let userInfo = (this.props.user.adminReducer.user)
     this.props.requestUserGames(userInfo)
     console.log('Request Games firing',this.props)
+    // this.handleQuestionRequest()
   }
 
   handleInputUpdate = (e) => {
@@ -40,6 +41,15 @@ class AddQuestionModal extends Component {
     // console.log(this.state)
   }
 
+  // handleQuestionRequest = () => {
+  //   let games_id = this.props.MotherGame
+  //   console.log('hit handle question request',games_id)
+  //   axios.get('/game/getquestions',games_id)
+  //   .then(res => {
+  //     console.log(res)
+  //   })
+  // }
+  
   render() {
     const motherGameid = this.props.MotherGame
     console.log(motherGameid, this.props)
@@ -75,21 +85,21 @@ class AddQuestionModal extends Component {
     }
 
     const doubleQuestion = () => {
-      closeAddQuestion();
+  
       addQuestionFunction()
     } 
-    console.log(this.state)
+    console.log(this.state,this.props)
     return (
       <div id='gameCreateModal' className='modal'>
         <div className='gameCreateModalContent'>
           <div className='gameCreateModalHeader'>
-            <h3>Questions For: Game Title Here</h3>
+            <h3>Questions</h3>
             <button onClick={closeAddQuestion}>X</button>
           </div>
             <div className='CreateGameEntryContBtn'>
               <button 
               id='modalCreateBtn'
-              onClick={addQuestionFunction}
+              onClick={doubleQuestion}
               >add question</button>
           </div>
           

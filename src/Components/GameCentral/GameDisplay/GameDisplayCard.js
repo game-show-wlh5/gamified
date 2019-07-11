@@ -68,19 +68,24 @@ class Card extends Component {
 
     return (      
     <div  className='cardContainer'>
-    <p>Game Intro: {game_intro}</p>
-    <p>Game Name: {game_title}</p>
-    <button className='cardBtn'
-    onClick={toggleEditModal}
-    >Edit</button>
-    <button
-    className='cardBtn'
-    onClick={toggleShareModal}
-    >Share</button>
-    <button 
-    className='cardBtn'
-    onClick={this.handleDeleteGame}
-    >Delete</button>
+      <div className='gameCardLeft'>
+        <p>Game Name: {game_title}</p>
+      </div>
+      <div className='gameCardRight'>
+        <button className='cardBtn'
+          onClick={toggleEditModal}
+          >Edit</button>
+        <button
+          className='cardBtn'
+          onClick={toggleShareModal}
+          >Share</button>
+        <button 
+          className='cardBtn'
+          onClick={this.handleDeleteGame}
+          >Delete</button>
+      </div>
+    
+    
     {this.state.shareDisplay !== 'false'
               ? <div id='modal' >Game Room id:{gameroom_id}</div>
               : null

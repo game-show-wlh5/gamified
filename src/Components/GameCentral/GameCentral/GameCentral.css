@@ -1,5 +1,6 @@
 .gameCentCont {
   min-height: 100vh;
+  background-image: url(../../../Assets/space_texture.png);
 }
 .gameCentralHeader{
   height: 6em;
