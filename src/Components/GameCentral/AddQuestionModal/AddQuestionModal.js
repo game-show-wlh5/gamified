@@ -4,6 +4,7 @@ import './AddQuestionModal.css'
 import QuestionDisplay from './QuestionDisplay'
 import { connect } from 'react-redux';
 import axios from 'axios'
+import {requestUserGames} from '../../../redux/adminReducer'
 
 class AddQuestionModal extends Component {
   constructor(props) {
@@ -20,6 +21,17 @@ class AddQuestionModal extends Component {
     }
   }
   
+  componentDidMount() {
+    let userInfo = (this.props.user.adminReducer.user)
+    this.props.requestUserGames(userInfo)
+    console.log('Request Games firing',this.props)
+  }
+
+  componentDidUpdate(){
+    let userInfo = (this.props.user.adminReducer.user)
+    this.props.requestUserGames(userInfo)
+    console.log('Request Games firing',this.props)
+  }
 
   handleInputUpdate = (e) => {
     this.setState({
@@ -30,7 +42,7 @@ class AddQuestionModal extends Component {
 
   render() {
     const motherGameid = this.props.MotherGame
-    console.log(motherGameid)
+    console.log(motherGameid, this.props)
     
     const closeAddQuestion = () => {
       this.props.closeAddQuestion('false')
@@ -130,7 +142,7 @@ class AddQuestionModal extends Component {
             {
               this.state.gameQuestion.map(question => {
                 return(
-                  <QuestionDisplay question={question}/>
+                  <QuestionDisplay question={question} />
                 )
               })
             }
@@ -148,4 +160,4 @@ function mapStateToProps(reduxState) {
   }
 }
 
-export default  connect(mapStateToProps)(AddQuestionModal)
+export default  connect(mapStateToProps,{requestUserGames})(AddQuestionModal)

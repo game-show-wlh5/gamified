@@ -2,8 +2,8 @@
 -- DELETE FROM users
 -- WHERE games_id = ${id};
 
--- DELETE FROM questions
--- WHERE games_id = ${id};
+DELETE FROM questions
+WHERE games_id = ${id};
 
 DELETE FROM games
 WHERE id = ${id}; 
