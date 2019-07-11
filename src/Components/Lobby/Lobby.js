@@ -84,13 +84,15 @@ class Lobby extends Component {
     return (
       <div>
         <div className="lobbyContainer">
-          <div className="lobbybox" />
-            <div className="game-title">Game Title</div>
+            <div className='spaceRaceImg'></div>
+            <div className='holder'>
+            <ReactAudioPlayer src={song} autoPlay loop/>
+
             <div className="lobbyDescription">
               Game Instructions: <br />
               {this.props.gameInfo.game_intro}
             </div>
-            <h2>Users in lobby</h2><br />
+            <h2 className='users'>Users in lobby</h2><br />
             <div className="lobbyUsers">
               {currentSession}
             </div>
@@ -101,6 +103,7 @@ class Lobby extends Component {
             <button className="leaveBtn" onClick={e => this.userLeave(this.props.gameInfo.username.username)}>
               Leave Game
             </button>
+            </div>
         </div>
       </div>
     );
