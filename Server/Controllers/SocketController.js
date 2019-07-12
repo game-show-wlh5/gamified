@@ -31,7 +31,7 @@ const SocketConnection = (server, app) => {
       const { gameID, username, userID, score } = data;
       await db.user_update({id: userID, score})
       const users = await db.get_lobby_users({ game_id: gameID });
-      socket.emit("finishedGame", users)
+      io.in(gameID).emit("finishedGame", users)
       // console.log(data);
     });
   });

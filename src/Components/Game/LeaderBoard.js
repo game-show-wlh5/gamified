@@ -31,6 +31,7 @@ class LeaderBoard extends Component {
                 <h3>{ele.score}</h3>
             </div>;
         });
+        console.log('users',users)
         return (
             <div className='leaderBoardCont'>
                 <div className='leaderBoardBoxsCont'>

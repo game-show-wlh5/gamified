@@ -87,7 +87,7 @@ class Card extends Component {
     
     
     {this.state.shareDisplay !== 'false'
-              ? <div id='modal' >Game Room id:{gameroom_id}</div>
+              ? <div className='gameRoomIdText' id='modal' >Game Room id:{gameroom_id}</div>
               : null
             }
     {this.state.editModal !== 'false'

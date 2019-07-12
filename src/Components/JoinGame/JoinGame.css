@@ -42,6 +42,13 @@ input {
   color: #333333
 }
 
-.join-btn {
+.logInHolder button {
   background: #824ED3;
+}
+
+.logInHolder button:hover {
+  background: rgb(139, 89, 219);
+}
+.logInHolder button:active {
+  background: rgb(111, 65, 185);
 }

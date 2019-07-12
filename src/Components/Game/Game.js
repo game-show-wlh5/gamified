@@ -40,7 +40,7 @@ class Game extends Component {
     handleGetGame = () => {
         // axios call to get game questions
         const { gameID } = this.props.gameInfo;
-        console.log('here', gameID)
+        // console.log('here', gameID)
         const { username, id } = this.props.gameInfo.username;
         axios.get(`/questions/${gameID}`)
             .then(res => {
