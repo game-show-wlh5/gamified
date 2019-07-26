@@ -19,10 +19,10 @@ const SocketConnection = (server, app) => {
       // console.log(db.get_lobby_users)
       const users = await db.get_lobby_users({ game_id: gameID });
       await socket.disconnect();
-      console.log(users)
+      // console.log(users)
       await io.to(gameID).emit("room joined", users);
-      console.log(username);
-      console.log(gameID);
+      // console.log(username);
+      // console.log(gameID);
     });
     socket.on("end game", gameID => {
       socket.to(gameID).emit("end room");
